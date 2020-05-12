@@ -1,7 +1,5 @@
 package com.cg.fms.service;
 
-import java.time.LocalDateTime;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
@@ -11,7 +9,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cg.fms.dto.Airport;
 import com.cg.fms.dto.Flight;
 import com.cg.fms.dto.Schedule;
 import com.cg.fms.dto.ScheduleFlight;
@@ -48,31 +45,17 @@ public class ScheduleFlightServiceImpl implements ScheduleFlightService {
 		}
 
 		@Override
-		public List<ScheduleFlight> viewScheduleFlights(Airport source, Airport destination, LocalDateTime flightDate) throws ScheduleFlightException {
-			logger.info("" + source);
-			logger.info("" + destination);
-			logger.info("" + flightDate);
-			List<ScheduleFlight> scheduleFlightList = new ArrayList<>();
-			scheduleFlightRepository.findAll().forEach(ScheduleFlight1 -> scheduleFlightList.add(ScheduleFlight1));
-			List<ScheduleFlight> extractedFlightList = new ArrayList<>();
-			for (ScheduleFlight scheduleFlight : scheduleFlightList) {
-				if (scheduleFlight.getSchedule().getSourceAirport().equals(source)
-						&& scheduleFlight.getSchedule().getDestinationAirport().equals(destination)) {
-					System.out.println("Schedule"+scheduleFlight.getSchedule().getDepartureDateTime().toLocalDate());
-					System.out.println("User"+flightDate);
-					if(scheduleFlight.getSchedule().getDepartureDateTime().toLocalDate().equals(flightDate))
-						extractedFlightList.add(scheduleFlight);
-				}
-			}
-			logger.info("Extracted list of scheduled flights as per parameters.");
-			System.out.println(extractedFlightList);
-			if (extractedFlightList.size() == 0) {
-				logger.error("No Flights Found.");
-				throw new ScheduleFlightException("No Flights Found");
-			}
-			logger.info("Returning list of scheduled flights.");
-			return extractedFlightList;
+		public List<ScheduleFlight> viewScheduleFlights() throws ScheduleFlightException {
+			
+			List<ScheduleFlight> scheduleFlight = (List<ScheduleFlight>) scheduleFlightRepository.findAll();
+			
+			if(scheduleFlight.isEmpty())
+				throw new ScheduleFlightException("Scheduled  flights not found!");
+			
+			
+			return scheduleFlight;
 		}
+
 
 		@Override
 		public ScheduleFlight viewScheduleFlightsById(int flightId) throws ScheduleFlightException{
@@ -109,7 +92,7 @@ public class ScheduleFlightServiceImpl implements ScheduleFlightService {
 
 		@Override
 		public ScheduleFlight modifyScheduleFlight(ScheduleFlight scheduleFlight) throws ScheduleFlightException{
-			// TODO Auto-generated method stub
+		
 			logger.info("Modifying Schedule flight");
 			Optional<ScheduleFlight> scheduleFlightUpdate = scheduleFlightRepository.findById(scheduleFlight.getScheduleFlightId());
 			if(!scheduleFlightUpdate.isPresent())

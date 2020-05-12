@@ -16,6 +16,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 
+/**
+ * @author Lavam
+ * description:Schedule Model
+ */
 @Entity
 @Table
 public class Schedule {

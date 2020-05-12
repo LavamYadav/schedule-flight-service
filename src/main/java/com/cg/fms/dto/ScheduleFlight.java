@@ -8,6 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * @author Lavam
+ * description: ScheduleFlight Model
+ */
 @Entity
 @Table
 public class ScheduleFlight {
