@@ -2,7 +2,6 @@ package com.cg.fms.dto;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -24,7 +23,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table
 public class Schedule {
 	@Id
-	@Column(name = "schedule_Id")
 	private int scheduleId;
 
 	@OneToOne(fetch = FetchType.EAGER)
@@ -33,12 +31,12 @@ public class Schedule {
 	@OneToOne(fetch = FetchType.EAGER)
 	private Airport destinationAirport;
 
-	@Column(name = "departure_date_time")
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime departureDateTime;
 
-	@Column(name = "arrival_date_time")
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
 	private LocalDateTime arrivalDateTime;

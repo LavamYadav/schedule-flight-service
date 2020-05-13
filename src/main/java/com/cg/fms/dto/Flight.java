@@ -1,6 +1,5 @@
 package com.cg.fms.dto;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,19 +19,15 @@ public class Flight {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "flight_number")
 	private int flightNumber;
 
 	@NotEmpty(message = "Flight Model is Empty")
-	@Column(name = "flight_model")
 	private String flightModel;
 
 	@NotEmpty(message = "Carrier Name is Empty")
-	@Column(name = "carrier_name")
 	private String carrierName;
 
 	@NotNull(message = "Seat Capacity is Empty")
-	@Column(name = "seat_capacity")
 	private int seatCapacity;
 
 	public Flight() {
