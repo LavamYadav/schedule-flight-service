@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.math.BigInteger;
 
 /**
  * @author Lavam
@@ -19,7 +20,7 @@ public class Flight {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int flightNumber;
+	private BigInteger flightNumber;
 
 	@NotEmpty(message = "Flight Model is Empty")
 	private String flightModel;
@@ -27,25 +28,18 @@ public class Flight {
 	@NotEmpty(message = "Carrier Name is Empty")
 	private String carrierName;
 
-	@NotNull(message = "Seat Capacity is Empty")
 	private int seatCapacity;
 
 	public Flight() {
 		super();
 
 	}
-
-	public int getFlightNumber() {
+	
+	public BigInteger getFlightNumber() {
 		return flightNumber;
 	}
 
-	@Override
-	public String toString() {
-		return "Flight [flightNumber=" + flightNumber + ", flightModel=" + flightModel + ", carrierName=" + carrierName
-				+ ", seatCapacity=" + seatCapacity + "]";
-	}
-
-	public void setFlightNumber(int flightNumber) {
+	public void setFlightNumber(BigInteger flightNumber) {
 		this.flightNumber = flightNumber;
 	}
 

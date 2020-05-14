@@ -5,6 +5,8 @@ import org.springframework.data.repository.CrudRepository;
 import com.cg.fms.dto.Flight;
 import com.cg.fms.dto.ScheduleFlight;
 
+import java.math.BigInteger;
+
 public interface ScheduleFlightRepository extends CrudRepository<ScheduleFlight, Integer> {
-	ScheduleFlight findByflight(Flight flight);
+	ScheduleFlight findByFlight(Flight flight);
 }

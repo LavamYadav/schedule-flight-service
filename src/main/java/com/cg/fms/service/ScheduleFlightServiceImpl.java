@@ -2,6 +2,8 @@ package com.cg.fms.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -32,14 +34,6 @@ public class ScheduleFlightServiceImpl implements ScheduleFlightService {
 
 		@Override
 		public ScheduleFlight addScheduleFlight(ScheduleFlight scheduleFlight) throws ScheduleFlightException{
-			logger.info("Adding Schedule");
-			Optional<Schedule> schedule = scheduleRepository.findById(scheduleFlight.getSchedule().getScheduleId());
-			if(!schedule.isPresent())
-			{
-				logger.error("Schedule Not Found");
-				throw new ScheduleFlightException("Scheduled Not Found");
-			}
-			logger.info("Added Schedule");
 			scheduleFlightRepository.save(scheduleFlight);
 			return scheduleFlight;
 		}
@@ -60,14 +54,9 @@ public class ScheduleFlightServiceImpl implements ScheduleFlightService {
 		@Override
 		public ScheduleFlight viewScheduleFlightsById(int flightId) throws ScheduleFlightException{
 			logger.info("Viewing Schedule By Id");
-			Optional<Flight> flight = flightRepository.findById(flightId);
+			Optional<Flight> flight = flightRepository.findById(BigInteger.valueOf(flightId));
 			Optional<ScheduleFlight> scheduleFlight = scheduleFlightRepository.findById(flightId);
-			if(!flight.isPresent())
-			{
-				logger.error("Flight Not present ");
-				throw new ScheduleFlightException("Flight not found");
-			}
-			else if(!scheduleFlight.isPresent())
+			if(!scheduleFlight.isPresent())
 			{
 				logger.error("Flight No. "+flightId + " not Scheduled");
 				throw new ScheduleFlightException("Flight No. "+flightId + " not Scheduled");
@@ -110,16 +99,16 @@ public class ScheduleFlightServiceImpl implements ScheduleFlightService {
 
 		
 		@Override
-		public void deleteScheduleFlight(Integer flightId) throws ScheduleFlightException {
+		public void deleteScheduleFlight(int flightId) throws ScheduleFlightException {
 			logger.info("Deleting Schedule flight");
-			Optional<Flight> flight = flightRepository.findById(flightId);
+			Optional<Flight> flight = flightRepository.findById(BigInteger.valueOf(flightId));
 			Optional<ScheduleFlight> scheduleFlight = scheduleFlightRepository.findById(flightId);
-			if(!flight.isPresent())
-			{
-				logger.error("Flight not found");
-				throw new ScheduleFlightException("Flight not found");
-			}
-			else if(!scheduleFlight.isPresent()) {
+//			if(!flight.isPresent())
+//			{
+//				logger.error("Flight not found");
+//				throw new ScheduleFlightException("Flight not found");
+//			}
+			 if(!scheduleFlight.isPresent()) {
 				logger.error("Flight No. "+flightId + " not Scheduled");
 				throw new ScheduleFlightException("Flight No. "+flightId + " not Scheduled");
 			}

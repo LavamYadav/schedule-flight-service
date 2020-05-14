@@ -2,11 +2,7 @@ package com.cg.fms.dto;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -23,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table
 public class Schedule {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int scheduleId;
 
 	@OneToOne(fetch = FetchType.EAGER)

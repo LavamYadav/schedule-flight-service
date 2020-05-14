@@ -1,11 +1,6 @@
 package com.cg.fms.dto;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Lavam
@@ -15,6 +10,7 @@ import javax.persistence.Table;
 @Table
 public class ScheduleFlight {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int scheduleFlightId;
 
 	@OneToOne(fetch = FetchType.EAGER)
